@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ('Sourcecode') {
             steps {
-                git branch: 'sprint1_develop', url: 'https://github.com/Sivarani15/spring-petclinic.git'
+                git branch: 'declarative', url: 'https://github.com/Sivarani15/spring-petclinic.git'
             }
         }
         stage ('Build') {
