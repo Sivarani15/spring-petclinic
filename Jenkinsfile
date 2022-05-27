@@ -10,24 +10,23 @@ pipeline {
         cron('0 * * * *')
     }
     stages {
-        stage ('Sourcecode'){
+        stage('Sourcecode') {
             steps {
                 git url: 'https://github.com/Sivarani15/spring-petclinic.git' ,
                     branch: 'main'
             }
         }
-        stage ('Buildthecode') {
+        stage('Buildthecode') {
             steps {
                 sh script: 'mvn clean package'
             }
         }
-        stage ('Archiving test results') {
+        stage('Archiving test results') {
             steps {
                 junit testResults: 'target/surefire-reports/*.xml'
                 archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
 
             }
-            
         }
     }
     post {
