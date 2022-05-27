@@ -18,7 +18,7 @@ pipeline {
         }
         stage ('Buildthecode') {
             steps {
-                sh script 'mvn clean package'
+                sh script: 'mvn clean package'
             }
         }
         stage ('Archiving test results') {
