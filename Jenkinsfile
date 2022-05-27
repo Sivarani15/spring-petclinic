@@ -23,7 +23,7 @@ pipeline {
         }
         stage ('Archiving test results') {
             junit testResults: 'target/surefire-reports/*.xml',
-            archiveArtifacts artifacts: '**/*.jar'
+            archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
         }
     }
     post {
