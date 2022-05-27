@@ -22,7 +22,7 @@ pipeline {
             }
         }
         stage ('Archiving test results') {
-            junit testResults: 'target/surefire-reports/*.xml',
+            junit testResults: 'target/surefire-reports/*.xml'
             archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
         }
     }
