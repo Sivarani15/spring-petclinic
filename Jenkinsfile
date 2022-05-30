@@ -18,8 +18,10 @@ pipeline {
         }
         stage('Buildthecode and sonarqube-analysis') {
             steps {
-                withSonarQubeEnv: ('SONAR_LATEST')
-                sh script: "mvn ${params.GOAL} sonar:sonar"
+                withSonarQubeEnv: ('SONAR_LATEST') {
+                    sh script: "mvn ${params.GOAL} sonar:sonar"
+                }
+                
             }
         }
         stage('Archiving test results') {
