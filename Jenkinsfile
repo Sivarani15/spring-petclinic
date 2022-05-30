@@ -6,8 +6,8 @@ pipeline {
      options { 
         timeout(time: 1, unit: 'HOURS') 
     }
-    triggers {
-        cron('0 * * * *')
+    parameters {
+        choice ( name: 'GOAL', choices: [ 'test', 'package', 'cleanpackage'])
     }
     stages {
         stage('Sourcecode') {
@@ -16,9 +16,10 @@ pipeline {
                     branch: 'main'
             }
         }
-        stage('Buildthecode') {
+        stage('Buildthecode and sonarqube-analysis') {
             steps {
-                sh script: 'mvn clean package'
+                withSonarQubeEnv: ('SONAR_LATEST')
+                sh script: "mvn ${params.GOAL} sonar:sonar"
             }
         }
         stage('Archiving test results') {
@@ -33,10 +34,15 @@ pipeline {
         success {
             //send success mail
             echo "sucess"
+            mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS: ${RUN_TESTS_DISPLAY_URL}", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
+                subject: " ${JOB_BASE_NAME} BUILD ID: ${BUILD_ID} BUILD NUMBER: ${BUILD_NUMBER} Success", to: 'sivarani42@gmail.com'
+            
         }
         unsuccessful {
             //send unsuccess mail
             echo "Unsuccessful"
+            mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS: ${RUN_TESTS_DISPLAY_URL}", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
+                subject: " ${JOB_BASE_NAME} BUILD ID: ${BUILD_ID} BUILD NUMBER: ${BUILD_NUMBER} failed", to: 'sivarani42@gmail.com'
         }
     }
 }
