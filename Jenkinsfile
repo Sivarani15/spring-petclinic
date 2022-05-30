@@ -3,7 +3,10 @@ pipeline {
     agent {
         label 'MAVEN-3.8.5'
     }
-     options { 
+    tools {
+        maven 'apache-maven-3.8.5' 
+    }
+    options { 
         timeout(time: 1, unit: 'HOURS') 
     }
     parameters {
