@@ -10,7 +10,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS') 
     }
     parameters {
-        choice ( name: 'GOAL', choices: [ 'compile', 'test', 'package', 'cleanpackage'])
+        choice ( name: 'GOAL', choices: [ 'compile', 'test', 'package', 'clean package'])
     }
     stages {
         stage('Sourcecode') {
