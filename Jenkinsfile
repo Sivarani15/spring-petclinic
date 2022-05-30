@@ -1,7 +1,7 @@
 // declarative pipe line
 pipeline {
     agent {
-        label 'JAVA11'
+        label 'MAVEN-3.8.5'
     }
      options { 
         timeout(time: 1, unit: 'HOURS') 
@@ -13,7 +13,7 @@ pipeline {
         stage('Sourcecode') {
             steps {
                 git url: 'https://github.com/Sivarani15/spring-petclinic.git' ,
-                    branch: 'main'
+                    branch: 'declarative'
             }
         }
         stage('Buildthecode and sonarqube-analysis') {
