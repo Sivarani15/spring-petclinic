@@ -23,7 +23,7 @@ pipeline {
             steps {
                 rtMavenRun (
                     // Tool name from Jenkins configuration.
-                    tool: MAVEN_DEFAULT,
+                    tool: MVN_DEFAULT,
                     // Set to true if you'd like the build to use the Maven Wrapper.
                     pom: 'pom.xml',
                     goals: 'clean install',
