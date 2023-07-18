@@ -2,4 +2,18 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user
+    destination: /var/www/html/
+hooks:
+  BeforeInstall:
+    - location: appspec/stop_server.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: appspec/install_dependencies.sh
+    - location: appspec/changeperms.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: appspec/start_server.sh
+      timeout: 300
+      runas: root
