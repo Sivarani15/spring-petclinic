@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo systemctl stop petclinic.service
+sudo systemctl stop httpd
